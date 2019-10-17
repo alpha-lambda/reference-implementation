@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/alpha-lambda/reference-implementation/issues"
   },
-  "homepage": "https://github.com/alpha-lambda/reference-implementation#readme"
+  "homepage": "https://github.com/alpha-lambda/reference-implementation#readme",
+  "dependencies": {
+    "@alpha-lambda/handler": "^1.2.1"
+  }
 }
