@@ -25,8 +25,8 @@
     "@alpha-lambda/handler": "^1.2.1"
   },
   "devDependencies": {
-    "serverless": "^1.54.0",
-    "serverless-plugin-common-excludes": "^2.4.0",
-    "serverless-plugin-include-dependencies": "^3.2.1"
+    "serverless": "1.54.0",
+    "serverless-plugin-common-excludes": "2.4.0",
+    "serverless-plugin-include-dependencies": "3.2.1"
   }
 }
