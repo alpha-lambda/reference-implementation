@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "test": "nyc --reporter=lcov --reporter=text mocha",
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -21,12 +23,17 @@
     "url": "https://github.com/alpha-lambda/reference-implementation/issues"
   },
   "homepage": "https://github.com/alpha-lambda/reference-implementation#readme",
-  "dependencies": {
-    "@alpha-lambda/handler": "^1.2.1"
-  },
   "devDependencies": {
+    "@alpha-lambda/eslint-config": "^1.1.0",
+    "eslint": "^6.5.1",
+    "eslint-plugin-mocha": "^6.2.0",
+    "mocha": "^6.2.1",
+    "nyc": "^14.1.1",
     "serverless": "^1.54.0",
     "serverless-plugin-common-excludes": "^2.4.0",
     "serverless-plugin-include-dependencies": "^3.2.1"
+  },
+  "dependencies": {
+    "@alpha-lambda/handler": "^1.2.1"
   }
 }
