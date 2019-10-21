@@ -28,6 +28,7 @@ provider:
   runtime: nodejs10.x
   stage: ${self:custom.stage}
   region: ${self:custom.region}
+  logRetentionInDays: 30
   environment:
     NAMESPACE: ${self:custom.namespace}
     TABLE_NAME: ${self:custom.bootstrap.exports.tableName}
