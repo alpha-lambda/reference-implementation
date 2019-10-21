@@ -37,6 +37,7 @@ plugins:
   - serverless-plugin-include-dependencies
   - serverless-plugin-bootstrap
   - serverless-plugin-split-stacks
+  - serverless-plugin-custom-roles
 
 package:
   individually: true
