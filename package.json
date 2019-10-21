@@ -35,7 +35,8 @@
     "serverless-plugin-custom-roles": "^1.1.1",
     "serverless-plugin-include-dependencies": "^3.2.1",
     "serverless-plugin-package-size": "^1.0.1",
-    "serverless-plugin-split-stacks": "^1.9.1"
+    "serverless-plugin-split-stacks": "^1.9.1",
+    "serverless-plugin-tracing": "^2.0.0"
   },
   "dependencies": {
     "@alpha-lambda/handler": "^1.2.1"

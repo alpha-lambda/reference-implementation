@@ -5,6 +5,7 @@ custom:
   region: ${opt:region, 'us-east-1'}
   namespace: ${self:service}-${self:custom.stage}
   packageLimit: 1MB
+  permissions: ${file(./serverless/permissions.yml)}
   bootstrap:
     file: serverless/bootstrap.yml
     stack: ${self:custom.namespace}-bootstrap
@@ -29,7 +30,12 @@ provider:
   stage: ${self:custom.stage}
   region: ${self:custom.region}
   logRetentionInDays: 30
+  tracing: true
+  iamRoleStatements:
+    - ${self:custom.permissions.xRayWriter}
   environment:
+    AWS_XRAY_CONTEXT_MISSING: LOG_ERROR
+    AWS_XRAY_ENABLED: ${self:provider.tracing}
     NAMESPACE: ${self:custom.namespace}
     TABLE_NAME: ${self:custom.bootstrap.exports.tableName}
     STREAM_DLQ_URL: ${self:custom.bootstrap.exports.streamDlqUrl}
@@ -41,6 +47,7 @@ plugins:
   - serverless-plugin-split-stacks
   - serverless-plugin-custom-roles
   - serverless-plugin-package-size
+  - serverless-plugin-tracing
 
 package:
   individually: true
