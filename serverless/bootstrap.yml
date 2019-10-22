@@ -51,6 +51,14 @@ Outputs:
       Name:
         Fn::Sub: ${namespace}-stream-dlq-arn
 
+  MonitoringTopicArn:
+    Description: ARN of monitoring SNS topic
+    Value:
+      Fn::GetAtt: MonitoringTopic.Arn
+    Export:
+      Name:
+        Fn::Sub: ${namespace}-monitoring-topic-arn
+
 Resources:
 
   MonitoringTopic:

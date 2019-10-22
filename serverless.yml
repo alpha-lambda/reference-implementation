@@ -6,6 +6,7 @@ custom:
   namespace: ${self:service}-${self:custom.stage}
   packageLimit: 1MB
   permissions: ${file(./serverless/permissions.yml)}
+  alerts: ${file(./serverless/alerts.yml)}
   bootstrap:
     file: serverless/bootstrap.yml
     stack: ${self:custom.namespace}-bootstrap
@@ -23,6 +24,8 @@ custom:
         Fn::ImportValue: ${self:custom.namespace}-stream-dlq-url
       streamDlqArn:
         Fn::ImportValue: ${self:custom.namespace}-stream-dlq-arn
+      monitoringTopicArn:
+        Fn::ImportValue: ${self:custom.namespace}-monitoring-topic-arn
 
 provider:
   name: aws
@@ -48,6 +51,7 @@ plugins:
   - serverless-plugin-custom-roles
   - serverless-plugin-package-size
   - serverless-plugin-tracing
+  - serverless-plugin-aws-alerts
 
 package:
   individually: true

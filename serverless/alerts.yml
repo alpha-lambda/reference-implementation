@@ -1,0 +1,38 @@
+nameTemplate: $[functionName]-$[metricName]
+stages:
+  - dev
+  - prod
+topics:
+  alarm:
+    Fn::ImportValue: ${self:custom.bootstrap.exports.monitoringTopicArn}
+definitions:
+  logWarnings:
+    metric: LogWarnings
+    threshold: 0
+    statistic: Sum
+    period: 60
+    evaluationPeriods: 1
+    comparisonOperator: GreaterThanThreshold
+    pattern: {$.level = 40}
+  logErrors:
+    metric: LogErrors
+    threshold: 0
+    statistic: Sum
+    period: 60
+    evaluationPeriods: 1
+    comparisonOperator: GreaterThanThreshold
+    pattern: {$.level > 40}
+  iteratorAge:
+    namespace: AWS/Lambda
+    metric: IteratorAge
+    threshold: 300000 # 5 minutes
+    statistic: Maximum
+    period: 60
+    evaluationPeriods: 1
+    comparisonOperator: GreaterThanThreshold
+    treatMissingData: missing
+
+function:
+  - logWarnings
+  - logErrors
+  - functionErrors
