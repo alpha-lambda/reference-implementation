@@ -7,6 +7,9 @@ custom:
   packageLimit: 1MB
   permissions: ${file(./serverless/permissions.yml)}
   alerts: ${file(./serverless/alerts.yml)}
+  prune:
+    automatic: true
+    number: 3
   bootstrap:
     file: serverless/bootstrap.yml
     stack: ${self:custom.namespace}-bootstrap
@@ -52,6 +55,7 @@ plugins:
   - serverless-plugin-package-size
   - serverless-plugin-tracing
   - serverless-plugin-aws-alerts
+  - serverless-prune-plugin
 
 package:
   individually: true
