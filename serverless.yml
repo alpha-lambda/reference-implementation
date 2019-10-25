@@ -4,7 +4,7 @@ custom:
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   namespace: ${self:service}-${self:custom.stage}
-  packageLimit: 1MB
+  packageLimit: 2MB
   permissions: ${file(./serverless/permissions.yml)}
   alerts: ${file(./serverless/alerts.yml)}
   prune:

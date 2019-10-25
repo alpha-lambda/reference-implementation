@@ -1,3 +1,10 @@
+dynamodbWriter:
+  Effect: Allow
+  Action:
+    - dynamodb:UpdateItem
+  Resource:
+    Fn::ImportValue: ${self:custom.namespace}-table-arn
+
 xRayWriter:
   Effect: Allow
   Action:

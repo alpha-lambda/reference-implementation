@@ -13,7 +13,7 @@ definitions:
     period: 60
     evaluationPeriods: 1
     comparisonOperator: GreaterThanThreshold
-    pattern: {$.level = 40}
+    pattern: '{$.level = 40}'
   logErrors:
     metric: LogErrors
     threshold: 0
@@ -21,7 +21,7 @@ definitions:
     period: 60
     evaluationPeriods: 1
     comparisonOperator: GreaterThanThreshold
-    pattern: {$.level > 40}
+    pattern: '{$.level > 40}'
   iteratorAge:
     namespace: AWS/Lambda
     metric: IteratorAge

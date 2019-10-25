@@ -1,5 +1,7 @@
-hello:
-  handler: src/handlers/api/hello.handler
+createPost:
+  handler: src/handlers/api/createPost.handler
+  iamRoleStatements:
+    - ${self:custom.permissions.dynamodbWriter}
 
 streamListener:
   handler: src/handlers/worker/streamListener.handler
