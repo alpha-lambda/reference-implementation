@@ -14,7 +14,7 @@ describe('createPost', function() {
     return lambdaTester(createPost.handler)
       .event({
         parentId: uuid.v4(),
-        text: 'Computer Science',
+        data: 'Computer Science',
         userId: uuid.v4(),
       })
       .context(this.context)

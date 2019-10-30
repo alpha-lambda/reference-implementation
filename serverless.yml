@@ -29,8 +29,10 @@ custom:
         Fn::ImportValue: ${self:custom.namespace}-stream-dlq-arn
       monitoringTopicArn:
         Fn::ImportValue: ${self:custom.namespace}-monitoring-topic-arn
-      tasksQueueArn:
-        Fn::ImportValue: ${self:custom.namespace}-tasks-queue-arn
+      updateVoteCountTasksQueueArn:
+        Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
+      updateVoteCountTasksQueueUrl:
+        Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-url
 
 provider:
   name: aws

@@ -5,6 +5,23 @@ dynamodbWriter:
   Resource:
     Fn::ImportValue: ${self:custom.namespace}-table-arn
 
+sqsReader:
+  Effect: Allow
+  Action:
+    - sqs:DeleteM*
+    - sqs:GetQueueAttributes
+    - sqs:ReceiveMessage
+  Resource:
+    Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
+
+sqsWriter:
+  Effect: Allow
+  Action:
+    - sqs:SendM*
+  Resource:
+    - Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
+    - Fn::ImportValue: ${self:custom.namespace}-stream-dlq-arn
+
 xRayWriter:
   Effect: Allow
   Action:

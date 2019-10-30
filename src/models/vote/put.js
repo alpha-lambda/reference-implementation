@@ -1,9 +1,10 @@
 'use strict';
 
 const {
-  compact,
   expand,
+  compact,
 } = require('./compression');
+const { TYPE } = require('./const');
 
 module.exports = async (context, post) => {
   const {
@@ -13,7 +14,7 @@ module.exports = async (context, post) => {
   const {
     postId,
     userId,
-    value,
+    data,
   } = post;
 
   const now = new Date().toISOString();
@@ -24,22 +25,25 @@ module.exports = async (context, post) => {
     UpdateExpression: `
       SET
       #createdAt = if_not_exists(#createdAt, :now),
-      #updatedAt = :now,
-      #value = :value
+      #data = :data,
+      #type = :type,
+      #updatedAt = :now
 
       ADD
       #version :one
     `,
     ExpressionAttributeNames: {
       '#createdAt': compact('createdAt'),
+      '#data': compact('data'),
+      '#type': compact('type'),
       '#updatedAt': compact('updatedAt'),
-      '#value': compact('value'),
       '#version': compact('version'),
     },
     ExpressionAttributeValues: {
+      ':data': data,
       ':now': now,
       ':one': 1,
-      ':value': value,
+      ':type': TYPE,
     },
     ReturnValues: 'ALL_NEW',
   };

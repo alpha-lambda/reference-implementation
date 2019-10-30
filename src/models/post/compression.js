@@ -3,9 +3,10 @@ const compression = require('../compression');
 module.exports = compression({
   active: 'a',
   createdAt: 'ca',
+  data: 'd',
   parentId: 'h',
   postId: 'r',
-  text: 't',
+  type: 't',
   updatedAt: 'ua',
   userId: 'u',
   version: 'v',

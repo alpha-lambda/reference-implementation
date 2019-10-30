@@ -3,17 +3,28 @@ createPost:
   iamRoleStatements:
     - ${self:custom.permissions.dynamodbWriter}
 
+putVote:
+  handler: src/handlers/api/putVote.handler
+  iamRoleStatements:
+    - ${self:custom.permissions.dynamodbWriter}
+
 streamListener:
   handler: src/handlers/worker/streamListener.handler
+  environment:
+    UPDATE_VOTE_COUNT_TASKS_QUEUE_URL: ${self:custom.bootstrap.exports.updateVoteCountTasksQueueUrl}
+  iamRoleStatements:
+    - ${self:custom.permissions.sqsWriter}
   events:
     - stream:
         type: dynamodb
         batchSize: 1000
         arn: ${self:custom.bootstrap.exports.streamArn}
 
-taskProcessor:
+updateVoteCountTasksWorker:
   handler: src/handlers/worker/taskProcessor.handler
   events:
     - sqs:
         batchSize: 10
-        arn: ${self:custom.bootstrap.exports.tasksQueueArn}
+        arn: ${self:custom.bootstrap.exports.updateVoteCountTasksQueueArn}
+  iamRoleStatements:
+    - ${self:custom.permissions.sqsReader}

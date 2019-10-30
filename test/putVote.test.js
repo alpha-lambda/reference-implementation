@@ -17,7 +17,7 @@ describe('putVote', function() {
       .event({
         postId: `${uuid.v4()}${delimiter}${uuid.v4()}`,
         userId: uuid.v4(),
-        value: 1,
+        data: 1,
       })
       .context(this.context)
       .expectResolve();

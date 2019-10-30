@@ -6,18 +6,18 @@ const vote = require('../../models/vote');
 const schema = {
   type: 'object',
   required: [
+    'data',
     'postId',
     'userId',
-    'value',
   ],
   properties: {
-    postId: { type: 'string' },
-    userId: { type: 'string' },
-    value: {
+    data: {
       type: 'integer',
       minimum: -1,
       maximim: 1,
     },
+    postId: { type: 'string' },
+    userId: { type: 'string' },
   },
 };
 

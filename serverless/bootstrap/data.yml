@@ -121,12 +121,12 @@ Resources:
           Value:
             Fn::GetAtt: StreamDeadLetterQueue.QueueName
 
-  TaskQueue:
+  UpdateVoteCountTasksQueue:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: templates/sqs-queue.yml
       Parameters:
         name:
-          Fn::Sub: ${namespace}-tasks
+          Fn::Sub: ${namespace}-update-vote-count-tasks
         monitoringTopicARN:
           Ref: MonitoringTopic

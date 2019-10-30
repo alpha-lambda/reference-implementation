@@ -3,9 +3,10 @@
 const uuid = require('uuid');
 
 const {
-  compact,
   expand,
+  compact,
 } = require('./compression');
+const { TYPE } = require('./const');
 
 module.exports = async (context, post) => {
   const {
@@ -15,7 +16,7 @@ module.exports = async (context, post) => {
 
   const {
     parentId,
-    text,
+    data,
     userId,
   } = post;
 
@@ -29,7 +30,8 @@ module.exports = async (context, post) => {
       SET
       #active = :active,
       #createdAt = :now,
-      #text = :text,
+      #data = :data,
+      #type = :type,
       #updatedAt = :now,
       #userId = :userId
 
@@ -42,7 +44,8 @@ module.exports = async (context, post) => {
     ExpressionAttributeNames: {
       '#active': compact('active'),
       '#createdAt': compact('createdAt'),
-      '#text': compact('text'),
+      '#data': compact('data'),
+      '#type': compact('type'),
       '#updatedAt': compact('updatedAt'),
       '#userId': compact('userId'),
       '#version': compact('version'),
@@ -51,7 +54,8 @@ module.exports = async (context, post) => {
       ':active': true,
       ':now': now,
       ':one': 1,
-      ':text': text,
+      ':data': data,
+      ':type': TYPE,
       ':userId': userId,
     },
     ReturnValues: 'ALL_NEW',

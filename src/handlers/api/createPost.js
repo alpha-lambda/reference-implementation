@@ -6,13 +6,13 @@ const post = require('../../models/post');
 const schema = {
   type: 'object',
   required: [
+    'data',
     'parentId',
-    'text',
     'userId',
   ],
   properties: {
+    data: { type: 'string' },
     parentId: { type: 'string' },
-    text: { type: 'string' },
     userId: { type: 'string' },
   },
 };
