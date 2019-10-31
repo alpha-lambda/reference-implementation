@@ -1,7 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
-
 const { stream } = require('../handler');
 const Task = require('../../tasks');
 
@@ -21,13 +19,25 @@ module.exports.handler = stream()
         const oldImage = dynamodbConverter.unmarshall(OldImage);
 
         if (vote.isVote(newImage) || vote.isVote(oldImage)) {
-          const newVote = vote.compression.expand(newImage);
-          const oldVote = vote.compression.expand(oldImage);
-          const taskDetail = record.eventName === 'REMOVE'
-            ? { postId: oldVote.postId, value: 0 }
-            : _.pick(newVote, ['postId', 'value']);
+          const {
+            postId: oldPostId,
+            data: oldValue = 0,
+          } = vote.compression.expand(oldImage);
+          const {
+            postId: newPostId,
+            data: newValue = 0,
+          } = vote.compression.expand(newImage);
 
-          memo.tasks.push(new Task('updateVoteCount', taskDetail));
+          const value = newValue - oldValue;
+
+          if (value !== 0) {
+            const taskDetail = {
+              postId: oldPostId || newPostId,
+              value,
+            };
+
+            memo.tasks.push(new Task('updateVoteCount', taskDetail));
+          }
         }
       } catch (err) {
         if (dlqEnabled) {

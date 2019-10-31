@@ -12,7 +12,23 @@ module.exports = {
 
     return sqs.send(context, updateVoteCount.queueUrl, messages);
   },
-  execute() {
-    console.log('executing updateVoteCount tasks');
+  execute(context, tasks) {
+    const { post } = context.models;
+
+    const votes = tasks.reduce((acc, task) => {
+      const { postId, value } = task.detail;
+
+      if (acc.has(postId)) {
+        acc.set(postId, acc.get(postId) + value);
+      } else {
+        acc.set(postId, value);
+      }
+
+      return acc;
+    }, new Map());
+
+    return Promise.all(Array.from(votes.entries()).map(([postId, count]) => {
+      return post.updateVoteCount(context, { postId, count });
+    }));
   },
 };

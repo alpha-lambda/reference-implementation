@@ -10,4 +10,5 @@ module.exports = compression({
   updatedAt: 'ua',
   userId: 'u',
   version: 'v',
+  voteCount: 'vc',
 });

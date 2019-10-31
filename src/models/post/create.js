@@ -1,5 +1,6 @@
 'use strict';
 
+const assert = require('assert');
 const uuid = require('uuid');
 
 const {
@@ -8,17 +9,15 @@ const {
 } = require('./compression');
 const { TYPE } = require('./const');
 
-module.exports = async (context, post) => {
+module.exports = async (context, { data, parentId, userId } = {}) => {
+  assert(data, 'missing data');
+  assert(parentId, 'missing parentId');
+  assert(userId, 'missing userId');
+
   const {
     config: { delimiter, tableName },
     drivers: { dynamodb },
   } = context;
-
-  const {
-    parentId,
-    data,
-    userId,
-  } = post;
 
   const postId = `${parentId}${delimiter}${uuid.v4()}`;
   const now = new Date().toISOString();

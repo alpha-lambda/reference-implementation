@@ -6,49 +6,47 @@ const {
   expand,
   compact,
 } = require('./compression');
-const { TYPE } = require('./const');
 
-module.exports = async (context, { data, postId, userId } = {}) => {
-  assert(data, 'missing postId');
+module.exports = async (context, { postId, count } = {}) => {
   assert(postId, 'missing postId');
-  assert(userId, 'missing postId');
+  assert(typeof count !== 'undefined', 'missing count');
 
   const {
-    config: { tableName },
+    config: { delimiter, tableName },
     drivers: { dynamodb },
   } = context;
 
+  const parentId = postId.split(delimiter).slice(0, -1).join(delimiter);
   const now = new Date().toISOString();
 
   const params = {
     TableName: tableName,
-    Key: compact({ postId, userId }),
+    Key: compact({ parentId, postId }),
     UpdateExpression: `
       SET
-      #createdAt = if_not_exists(#createdAt, :now),
-      #data = :data,
-      #type = :type,
       #updatedAt = :now
 
       ADD
-      #version :one
+      #version :one,
+      #voteCount :count
+    `,
+    ConditionExpression: `
+        attribute_exists(#version)
     `,
     ExpressionAttributeNames: {
-      '#createdAt': compact('createdAt'),
-      '#data': compact('data'),
-      '#type': compact('type'),
       '#updatedAt': compact('updatedAt'),
       '#version': compact('version'),
+      '#voteCount': compact('voteCount'),
     },
     ExpressionAttributeValues: {
-      ':data': data,
       ':now': now,
       ':one': 1,
-      ':type': TYPE,
+      ':count': count,
     },
     ReturnValues: 'ALL_NEW',
   };
 
+  console.log('updating vote count');
   const result = await dynamodb.update(context, params);
 
   return expand(result.Attributes);

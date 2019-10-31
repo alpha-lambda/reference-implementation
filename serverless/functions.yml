@@ -27,4 +27,5 @@ updateVoteCountTasksWorker:
         batchSize: 10
         arn: ${self:custom.bootstrap.exports.updateVoteCountTasksQueueArn}
   iamRoleStatements:
+    - ${self:custom.permissions.dynamodbWriter}
     - ${self:custom.permissions.sqsReader}
