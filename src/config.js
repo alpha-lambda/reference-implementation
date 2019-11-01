@@ -6,6 +6,7 @@ module.exports = {
   delimiter: ':',
   logLevel: process.env.LOG_LEVEL,
   namespace: process.env.NAMESPACE,
+  responseBucket: process.env.RESPONSE_BUCKET_NAME,
   stream: {
     dlqEnabled: yn(process.env.STREAM_DLQ_ENABLED, { default: true }),
     dlqUrl: process.env.STREAM_DLQ_URL,

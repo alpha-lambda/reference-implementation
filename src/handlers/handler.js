@@ -21,8 +21,9 @@ const drivers = {
 };
 
 const {
-  requestId,
   logging,
+  requestId,
+  response,
 } = middleware;
 
 const common = () => alpha()
@@ -34,6 +35,7 @@ module.exports.api = ({ schema = true } = {}) => {
   const validator = ajv.compile(schema);
 
   return common()
+    .use(response())
     .use(async (event, context, next) => {
       ajv.validate(validator, event);
       return next();

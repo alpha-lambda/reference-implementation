@@ -27,6 +27,14 @@ Outputs:
       Name:
         Fn::Sub: ${namespace}-table-arn
 
+  ResponseBucketName:
+    Description: Name of the response bucket
+    Value:
+      Ref: ResponseBucket
+    Export:
+      Name:
+        Fn::Sub: ${namespace}-response-bucket-name
+
   StreamArn:
     Description: ARN of the DynamoDB Stream
     Value:
@@ -91,6 +99,16 @@ Resources:
       TimeToLiveSpecification:
         AttributeName: ttl
         Enabled: true
+
+  ResponseBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: ${namespace}-response
+      LifecycleConfiguration:
+        Rules:
+          - Status: Enabled
+            ExpirationInDays: 1
 
   StreamDeadLetterQueue:
     Type: AWS::SQS::Queue

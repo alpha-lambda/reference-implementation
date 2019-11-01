@@ -4,7 +4,7 @@ custom:
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   namespace: ${self:service}-${self:custom.stage}
-  packageLimit: 4MB
+  packageLimit: 6MB
   permissions: ${file(./serverless/permissions.yml)}
   alerts: ${file(./serverless/alerts.yml)}
   prune:
@@ -21,6 +21,8 @@ custom:
         Fn::ImportValue: ${self:custom.namespace}-table-name
       tableArn:
         Fn::ImportValue: ${self:custom.namespace}-table-arn
+      responseBucketName:
+        Fn::ImportValue: ${self:custom.namespace}-response-bucket-name
       streamArn:
         Fn::ImportValue: ${self:custom.namespace}-stream-arn
       streamDlqUrl:
@@ -48,6 +50,7 @@ provider:
     AWS_XRAY_CONTEXT_MISSING: LOG_ERROR
     AWS_XRAY_ENABLED: ${self:provider.tracing}
     NAMESPACE: ${self:custom.namespace}
+    RESPONSE_BUCKET_NAME: ${self:custom.bootstrap.exports.responseBucketName}
     TABLE_NAME: ${self:custom.bootstrap.exports.tableName}
     STREAM_DLQ_URL: ${self:custom.bootstrap.exports.streamDlqUrl}
 
