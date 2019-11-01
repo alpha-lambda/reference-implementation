@@ -1,3 +1,13 @@
+dynamodbReader:
+  Effect: Allow
+  Action:
+    - dynamodb:BatchGetItem
+    - dynamodb:GetItem
+    - dynamodb:Query
+    - dynamodb:Scan
+  Resource:
+    Fn::ImportValue: ${self:custom.namespace}-table-arn
+
 dynamodbWriter:
   Effect: Allow
   Action:

@@ -19,8 +19,8 @@ module.exports = async (context, { data, parentId, userId } = {}) => {
     drivers: { dynamodb },
   } = context;
 
-  const postId = `${parentId}${delimiter}${uuid.v4()}`;
   const now = new Date().toISOString();
+  const postId = [now, parentId, uuid.v4()].join(delimiter);
 
   const params = {
     TableName: tableName,

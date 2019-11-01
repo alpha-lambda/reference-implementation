@@ -16,7 +16,7 @@ module.exports = async (context, { postId, count } = {}) => {
     drivers: { dynamodb },
   } = context;
 
-  const parentId = postId.split(delimiter).slice(0, -1).join(delimiter);
+  const parentId = postId.split(delimiter).slice(1, -1).join(delimiter);
   const now = new Date().toISOString();
 
   const params = {

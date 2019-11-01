@@ -3,6 +3,11 @@ createPost:
   iamRoleStatements:
     - ${self:custom.permissions.dynamodbWriter}
 
+searchPosts:
+  handler: src/handlers/api/searchPosts.handler
+  iamRoleStatements:
+    - ${self:custom.permissions.dynamodbReader}
+
 putVote:
   handler: src/handlers/api/putVote.handler
   iamRoleStatements:
