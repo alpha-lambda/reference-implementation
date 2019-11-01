@@ -37,6 +37,7 @@
     "serverless-plugin-common-excludes": "^3.0.0",
     "serverless-plugin-custom-roles": "^1.1.1",
     "serverless-plugin-include-dependencies": "^4.0.0",
+    "serverless-plugin-lambda-account-access": "^4.0.2",
     "serverless-plugin-package-size": "^1.0.1",
     "serverless-plugin-split-stacks": "^1.9.1",
     "serverless-plugin-tracing": "^2.0.0",

@@ -1,0 +1,7 @@
+groups:
+  api:
+    role:
+      - name: ${self:custom.namespace}-lambda-api-${self:custom.region}
+        principals: [] # principal as an accountId (not recommended), role or CFN import
+    policy:
+        principals: [] # principal as an accountId (not recommended), role or CFN import

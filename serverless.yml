@@ -4,7 +4,7 @@ custom:
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   namespace: ${self:service}-${self:custom.stage}
-  packageLimit: 2MB
+  packageLimit: 4MB
   permissions: ${file(./serverless/permissions.yml)}
   alerts: ${file(./serverless/alerts.yml)}
   prune:
@@ -43,6 +43,7 @@ provider:
   tracing: true
   iamRoleStatements:
     - ${self:custom.permissions.xRayWriter}
+  access: ${file(./serverless/access.yml)}
   environment:
     AWS_XRAY_CONTEXT_MISSING: LOG_ERROR
     AWS_XRAY_ENABLED: ${self:provider.tracing}
@@ -59,6 +60,7 @@ plugins:
   - serverless-plugin-package-size
   - serverless-plugin-tracing
   - serverless-plugin-aws-alerts
+  - serverless-plugin-lambda-account-access
   - serverless-prune-plugin
 
 package:

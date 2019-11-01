@@ -1,15 +1,18 @@
 createPost:
   handler: src/handlers/api/createPost.handler
+  allowAccess: api
   iamRoleStatements:
     - ${self:custom.permissions.dynamodbWriter}
 
 searchPosts:
   handler: src/handlers/api/searchPosts.handler
+  allowAccess: api
   iamRoleStatements:
     - ${self:custom.permissions.dynamodbReader}
 
 putVote:
   handler: src/handlers/api/putVote.handler
+  allowAccess: api
   iamRoleStatements:
     - ${self:custom.permissions.dynamodbWriter}
 
