@@ -46,7 +46,6 @@ module.exports = async (context, { postId, count } = {}) => {
     ReturnValues: 'ALL_NEW',
   };
 
-  console.log('updating vote count');
   const result = await dynamodb.update(context, params);
 
   return expand(result.Attributes);

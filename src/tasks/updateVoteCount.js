@@ -3,7 +3,7 @@
 module.exports = {
   type: 'updateVoteCount',
   schedule(context, tasks) {
-    console.log('scheduling updateVoteCount tasks');
+    context.log.debug({ tasks }, 'scheduling updateVoteCount tasks');
 
     const { updateVoteCount } = context.config.tasks;
     const { sqs } = context.drivers;

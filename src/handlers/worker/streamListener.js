@@ -14,7 +14,7 @@ module.exports.handler = stream()
       const { NewImage, OldImage } = record.dynamodb;
 
       try {
-        console.log('decoding dynamodb record');
+        context.log.debug({ record }, 'decoding dynamodb record');
         const newImage = dynamodbConverter.unmarshall(NewImage);
         const oldImage = dynamodbConverter.unmarshall(OldImage);
 
@@ -53,7 +53,7 @@ module.exports.handler = stream()
     await Task.schedule(context, tasks);
 
     if (deadLetters.length > 0) {
-      console.log('sending to dlq');
+      context.log.debug({ dlqUrl, deadLetters }, 'sending to dlq');
       await sqs.sendToDLQ(context, dlqUrl, deadLetters);
     }
   });
