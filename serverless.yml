@@ -23,6 +23,10 @@ custom:
         Fn::ImportValue: ${self:custom.namespace}-table-arn
       responseBucketName:
         Fn::ImportValue: ${self:custom.namespace}-response-bucket-name
+      sendNotificationTasksQueueArn:
+        Fn::ImportValue: ${self:custom.namespace}-send-notification-tasks-queue-arn
+      sendNotificationTasksQueueUrl:
+        Fn::ImportValue: ${self:custom.namespace}-send-notification-tasks-queue-url
       streamArn:
         Fn::ImportValue: ${self:custom.namespace}-stream-arn
       streamDlqUrl:

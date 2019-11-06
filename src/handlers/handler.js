@@ -12,10 +12,12 @@ const ajv = require('../ajv');
 const config = require('../config');
 const middleware = require('./middleware');
 const models = require('../models');
+const Notifier = require('../drivers/notifier');
 
 const drivers = {
   dynamodb: new DynamoDBDocumentClient({ level: 'debug' }),
   dynamodbConverter: AWS.DynamoDB.Converter,
+  notifier: new Notifier(conf.notifier),
   sqs: new SQS({ level: 'debug' }),
   xray: new XRay({ level: 'debug', ...config.xRay }),
 };

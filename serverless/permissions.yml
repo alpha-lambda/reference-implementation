@@ -22,13 +22,15 @@ sqsReader:
     - sqs:GetQueueAttributes
     - sqs:ReceiveMessage
   Resource:
-    Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
+    - Fn::ImportValue: ${self:custom.namespace}-send-notification-tasks-queue-arn
+    - Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
 
 sqsWriter:
   Effect: Allow
   Action:
     - sqs:SendM*
   Resource:
+    - Fn::ImportValue: ${self:custom.namespace}-send-notification-tasks-queue-arn
     - Fn::ImportValue: ${self:custom.namespace}-update-vote-count-tasks-queue-arn
     - Fn::ImportValue: ${self:custom.namespace}-stream-dlq-arn
 

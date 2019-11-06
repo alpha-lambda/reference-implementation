@@ -6,17 +6,18 @@ const {
   expand,
   compact,
 } = require('./compression');
+const getParentId = require('./getParentId');
 
 module.exports = async (context, { postId, count } = {}) => {
   assert(postId, 'missing postId');
   assert(typeof count !== 'undefined', 'missing count');
 
   const {
-    config: { delimiter, tableName },
+    config: { tableName },
     drivers: { dynamodb },
   } = context;
 
-  const parentId = postId.split(delimiter).slice(1, -1).join(delimiter);
+  const parentId = getParentId(context, postId);
   const now = new Date().toISOString();
 
   const params = {

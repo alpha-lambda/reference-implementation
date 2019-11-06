@@ -7,7 +7,7 @@ module.exports.handler = stream()
   .use(async (event, context) => {
     const { dlqEnabled, dlqUrl } = context.config.stream;
     const { dynamodbConverter, sqs } = context.drivers;
-    const { vote } = context.models;
+    const { post, vote } = context.models;
     const { Records } = event;
 
     const { tasks, deadLetters } = Records.reduce((memo, record) => {
@@ -38,6 +38,10 @@ module.exports.handler = stream()
 
             memo.tasks.push(new Task('updateVoteCount', taskDetail));
           }
+        } else if (post.isPost(newImage) && record.eventName === 'INSERT') {
+          const { postId } = newImage;
+
+          memo.tasks.push(new Task('sendNotification', { postId }));
         }
       } catch (err) {
         if (dlqEnabled) {

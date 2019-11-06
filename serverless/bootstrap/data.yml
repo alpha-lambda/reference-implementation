@@ -110,6 +110,16 @@ Resources:
           - Status: Enabled
             ExpirationInDays: 1
 
+  SendNotificationTasksQueue:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: templates/sqs-queue.yml
+      Parameters:
+        name:
+          Fn::Sub: ${namespace}-send-notification-tasks
+        monitoringTopicARN:
+          Ref: MonitoringTopic
+
   StreamDeadLetterQueue:
     Type: AWS::SQS::Queue
     DeletionPolicy: Retain
