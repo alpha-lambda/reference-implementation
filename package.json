@@ -29,7 +29,7 @@
     "eslint": "^6.5.1",
     "eslint-plugin-mocha": "^6.2.0",
     "lambda-tester": "^4.0.0",
-    "mocha": "^7.0.0",
+    "mocha": "^8.0.0",
     "nyc": "^15.0.0",
     "serverless": "^1.54.0",
     "serverless-plugin-aws-alerts": "^1.4.0",
