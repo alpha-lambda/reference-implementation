@@ -1,6 +1,6 @@
 'use strict';
 
-const Ajv = require('ajv');
+const { default: Ajv } = require('ajv');
 
 const LambdaError = require('./error');
 
