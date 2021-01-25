@@ -44,7 +44,7 @@
     "serverless-prune-plugin": "^1.4.1"
   },
   "dependencies": {
-    "@alpha-lambda/aws-drivers": "^1.3.4",
+    "@alpha-lambda/aws-drivers": "^2.0.0",
     "@alpha-lambda/handler": "^1.2.1",
     "@alpha-lambda/tasks": "^1.0.0",
     "ajv": "^7.0.0",
