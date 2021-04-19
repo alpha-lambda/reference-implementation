@@ -31,7 +31,7 @@
     "lambda-tester": "^4.0.0",
     "mocha": "^8.0.0",
     "nyc": "^15.0.0",
-    "serverless": "^2.0.0",
+    "serverless": "^2.18.0",
     "serverless-plugin-aws-alerts": "^1.4.0",
     "serverless-plugin-bootstrap": "^2.0.7",
     "serverless-plugin-common-excludes": "^3.0.0",
