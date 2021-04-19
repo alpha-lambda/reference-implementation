@@ -25,7 +25,7 @@
   "homepage": "https://github.com/alpha-lambda/reference-implementation#readme",
   "devDependencies": {
     "@alpha-lambda/eslint-config": "^1.1.0",
-    "env-cmd": "^10.0.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-mocha": "^8.0.0",
     "lambda-tester": "^4.0.0",
