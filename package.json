@@ -41,7 +41,7 @@
     "serverless-plugin-package-size": "^1.0.1",
     "serverless-plugin-split-stacks": "^1.9.1",
     "serverless-plugin-tracing": "^2.0.0",
-    "serverless-prune-plugin": "^1.4.1"
+    "serverless-prune-plugin": "^1.5.0"
   },
   "dependencies": {
     "@alpha-lambda/aws-drivers": "^2.0.0",
