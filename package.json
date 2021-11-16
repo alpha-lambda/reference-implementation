@@ -48,7 +48,7 @@
     "@alpha-lambda/handler": "^1.2.1",
     "@alpha-lambda/tasks": "^1.0.0",
     "ajv": "^8.0.0",
-    "aws-sdk": "^2.558.0",
+    "aws-sdk": "^2.814.0",
     "lambda-envelope": "^2.0.5",
     "lodash": "^4.17.19",
     "pino": "^6.0.0",
