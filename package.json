@@ -30,7 +30,7 @@
     "eslint-plugin-mocha": "^9.0.0",
     "lambda-tester": "^4.0.0",
     "mocha": "^9.0.0",
-    "nyc": "^15.0.0",
+    "nyc": "^18.0.0",
     "serverless": "^2.0.0",
     "serverless-plugin-aws-alerts": "^1.4.0",
     "serverless-plugin-bootstrap": "^2.0.7",
